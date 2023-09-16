@@ -38,6 +38,8 @@ class Animal {
 let myCat = Animal(gender:.undefined)
 myCat.eat( )
 
+/* [1-1] Animal 的 gender 屬性用 let 還是 var 比較好？
+Ans:因為 gender 屬性會有變，若用 let 定義的話，後面若要更新其他部分，就會變成要重新定義一次；因此在這裡使用 var 較佳。 */
 
 /*
 ## 2. Declare three classes: Elephant , Tiger , Horse that inherits from Animal and override the eat() method to print what they usually eat.
@@ -82,6 +84,7 @@ zoo.weeklyHot = tiger
 zoo.weeklyHot = elephant
 zoo.weeklyHot = horse */
 
+/* 原本寫法
 class Zoo<A> {
     var weeklyHot: A
     
@@ -89,7 +92,17 @@ class Zoo<A> {
         self.weeklyHot = weeklyHot
     }
 }
-//測試
+ [1-3] 這邊用了泛型的方式沒問題；如果不用泛型的話，A 可以用什麼取代？(<A> 拿掉，測試的那兩行不動)
+ 試用以下方式 */
+
+class Zoo {
+    var weeklyHot: Animal
+    
+    init(weeklyHot: Animal) {
+        self.weeklyHot = weeklyHot
+    }
+}
+//測試可行
 let zoo = Zoo(weeklyHot: Tiger(gender: .female))
 zoo.weeklyHot
 
@@ -114,8 +127,29 @@ zoo.weeklyHot
 /* instance method 是需要先生成一個實體的類別，才能套用的方法；
  type method 不需要產生實體的類別，便可引用使用，常見的是搭配 class 或 static 使用。 */
 
+/*[1-7] "需要先生成一個實體的類別" -> 實體 (instance) 跟類別 (class) 的關係是什麼？這邊應該是哪一個？
+Ans: class 是指類別， instance是指實際依據某個參考分類出的實體。
+ 舉例來說：底下範例中的 doggy 是 Dog 類別中的一個 instance，有 name 屬性；Dog 是一個 class，我們可以創建多個 Dog 的 instance，每個 instance 都有相同的方法和屬性定義；而 class 是定義了一個類型，可以有多個 instance 屬於同一個 class 。 */
+
 // ## 8. What does self mean in an instance method and a type method respectively?
 /* self 通常是用來判別當下所想要指定的數值，如果去掉 self 的情況下，程式 defult 會自動判別取用數值，在需要有判別和指定數值的情況下，可以使用 self 作區別。*/
+
+//[1-7、1-8] 可以用一段程式碼來說明看看嗎？
+class Dog {
+    var name: String
+    init(name: String) {
+        self.name = name
+    }//self 代表 doggy 的實例，在此可協助 name 的屬性進行運作。
+    func introduce() {
+        print("Hello, my name is \(self.name)")
+    }
+    class func staticMethod() {
+        print("This is a class method.")
+    }
+}
+let doggy = Dog(name: "Pumpkin")
+doggy.introduce() // instance method
+Dog.staticMethod() // type method
 
 /*
 ## Part 2: Enumerations and Optionals in Swift

@@ -8,12 +8,12 @@
 import UIKit
 
 class ViewController: UIViewController {
-
-@IBOutlet weak var topLabel: UILabel!
-@IBOutlet weak var middleLabel: UILabel!
-@IBOutlet weak var button: UIButton!
-
-let text = [
+    
+    @IBOutlet weak var topLabel: UILabel!
+    @IBOutlet weak var middleLabel: UILabel!
+    @IBOutlet weak var button: UIButton!
+    
+    let text = [
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas tempus.",
         "Contrary to popular belief, Lorem Ipsum is not simply random text.",
         "Richard McClintock, a Latin professor at Hampden-Sydney College in ",
@@ -22,17 +22,17 @@ let text = [
         "This book is a treatise on the theory of ethics, very popular during the.",
         "The first line of Lorem Ipsum, Lorem ipsum dolor sit amet.."
     ]
-
-override func viewDidLoad() {
-    super.viewDidLoad()
-}
-@IBAction func buttonTapped(_ sender: UIButton) {
-    let randomColor = UIColor(red: CGFloat.random(in: 0...1),
-                              green: CGFloat.random(in: 0...1),
-                              blue: CGFloat.random(in: 0...1),
-                              alpha: 1.0)
-    let randomText = text.randomElement() ?? ""
-            middleLabel.text = randomText
-            view.backgroundColor = randomColor
-        }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
     }
+    @IBAction func buttonTapped(_ sender: UIButton) {
+        let randomColor = UIColor(red: CGFloat.random(in: 0...1),
+                                  green: CGFloat.random(in: 0...1),
+                                  blue: CGFloat.random(in: 0...1),
+                                  alpha: 1.0)
+        let randomText = text.randomElement() ?? ""
+        middleLabel.text = randomText
+        view.backgroundColor = randomColor
+    }
+}
